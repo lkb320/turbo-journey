@@ -2,23 +2,13 @@
 #' output: github_document
 #' ---
 
-
-## how jenny might do this in a first exploration
-## purposely leaving a few things to change later!
-
-#' Which libraries does R search for packages?
-.libPaths()
-
-## let's confirm the second element is, in fact, the default library
-.Library
-identical(.Library, .libPaths()[2])
+library(fs)
+library(tidyverse)
 
 ## Huh? Maybe this is an symbolic link issue?
-library(fs)
 identical(path_real(.Library), path_real(.libPaths()[2]))
 
 #' Installed packages
-library(tidyverse)
 ipt <- installed.packages() %>%
   as_tibble()
 
@@ -42,11 +32,4 @@ ipt %>%
   count(Built) %>%
   mutate(prop = n / sum(n))
 
-#' Reflections
 
-## reflect on ^^ and make a few notes to yourself; inspiration
-##   * does the number of base + recommended packages make sense to you?
-##   * how does the result of .libPaths() relate to the result of .Library?
-
-
-#' Going further
